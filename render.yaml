@@ -1,0 +1,21 @@
+# Render Blueprint for Exercise Form Correction Backend
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: gymi-server
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
+      - key: DEBUG
+        value: "false"
+      - key: CORS_ORIGINS
+        value: "https://gymi.vercel.app,https://*.vercel.app"
